@@ -1,0 +1,108 @@
+Description	
+Please always check http://research.baycrest.org/~jimmy/NIfTI for detail descriptions and latest updates.
+
+If you are confused by the Left / Right of an ANALYZE image, you can consult http://research.baycrest.org/~jimmy/UseANALYZE.htm
+
+You may also want to read http://research.baycrest.org/~jimmy/NIfTI/FAQ.htm
+
+Basic Programs:
+
+1. load_untouch_header_only.m: Load only the header section of
+NIfTI or ANALYZE file. The input file will be automatically
+detected. NIfTI structure will be returned for NIfTI file, and
+ANALYZE structure will be returned for ANALYZE file.
+
+2. load_nii.m: Load N-Dimensional NIfTI file (where N can be from 3
+to 7) or ANALYZE file (where N can be from 3 to 4), and apply
+header info (e.g. affine geometric transform, voxel intensity
+scaling, etc.) to the data. If your file has more than 3-Dimension
+(e.g. time series etc.), you can also specify a range to extract
+only 1 or several volumes.
+
+3. save_nii.m: Save N-Dimensional NIfTI structure (where N can be
+from 3 to 7) that is loaded by "load_nii.m" or made by "make_nii.m"
+into a NIfTI file.
+
+4. make_nii.m: Make N-Dimensional NIfTI structure (where N can be
+from 3 to 7) based on the N-Dimensional matrix and other optional
+parameters (e.g. voxel_size, origin, etc.). Using "save_nii"
+command, the NIfTI structure that is made by "make_nii" can be
+saved into a NIfTI file.
+
+5. make_ana.m: Make 3D ANALYZE structure based on the 3D matrix and
+other optional parameters (e.g. voxel_size, origin, etc.). Using
+"save_untouch_nii" command, the ANALYZE structure that is made by
+"make_ana" can be saved into an ANALYZE file in order to be
+compatible with some ANALYZE only programs.
+
+6. reslice_nii.m: Re-sample 3D (or 4D) NIfTI file, or ANALYZE file
+with affine matrix M in .mat file, and save the re-sampled data
+into a new NIfTI file. The program will base on the affine matrix,
+which is especially useful for oblique images with non-orthogonal
+rotation or shearing that cannot be loaded with "load_nii.m". You
+can also specify voxel_size, etc. It will not cause negative
+effect, as long as you remember not to do slice time correction
+after using "reslice_nii.m".
+
+7. clip_nii.m: Clip the volume(s) in NIfTI structure from any of
+the six sides, while keeping the originator, voxel size, data type,
+and description unchanged. The program is especially useful after
+you use reslice_nii, since the new volume is padded with a lot of
+empty voxels.
+
+8. view_nii.m: View & Edit 3D (or 4D) NIfTI or ANALYZE structure
+that is loaded by "load_nii.m" or made by "make_nii.m". Activation
+map, ROI, etc. can be overlaid on top of a background image (see
+above picture). Plotted view can be embedded into your existing
+figure window. If you use it as an individual program, it can also
+edit the orientation and voxel value of the image, view volume
+histogram, and save the modified image.
+
+9. load_untouch_nii.m: Load N-Dimensional NIfTI file (where N can
+be from 3 to 7) or ANALYZE file (where N can be from 3 to 4), but
+do not apply any changes that are indicated in the header. WARNING:
+Do not use "view_nii.m" to view the structure that is loaded by
+"load_untouch_nii.m".
+
+10. save_untouch_nii.m: Save N-Dimensional NIfTI structure (where N
+can be from 3 to 7) or ANALYZE structure (where N can be from 3 to
+4) that is loaded by "load_untouch_nii.m" or made by "make_ana.m"
+into a new NIfTI or ANALYZE file. If you do not modify the loaded
+dataset, the header and data in the new saved file should be the
+same as those in the original file.
+
+Other Programs:
+
+1. collapse_nii_scan.m: Integrate multiple single-scan NIfTI or
+ANALYZE files into a multiple-scan NIfTI file.
+
+2. expand_nii_scan.m: Break a multiple-scan NIfTI file into
+multiple single-scan NIfTI files.
+
+3. save_untouch_slice.m: Save back to the original image with a
+portion of slices that was loaded by load_untouch_nii. You can
+process those slices matrix in any way, as long as their dimension
+is not altered.
+
+4. get_nii_frame.m: Return the number of time frames of a NIfTI
+file.
+
+5. flip_lr.m: Flip NIfTI or ANALYZE file Left-Right along the plane
+across the originator, and save the L-R flipped data into a NIfTI
+file. WARNING: Please use this program with caution, although you
+can always flip it back.
+
+6. load_nii_ext.m: Load header extension from a NIfTI file.
+
+7. mat_into_hdr.m: Integrate affine matrix in old SPM .mat file
+into its .hdr header file. Thus, the ANALYZE file is converted into
+a NIfTI file with the updated .hdr header file.
+
+Acknowledgements	Mri Analyze Tools inspired this file.
+
+This file inspired Seconds To Hours, Minutes, Seconds, Composite
+Image, Siemens Dicom Sort And Convert To N If Ti, Create Mosaic.M,
+Field Mapping Toolbox, Function For Viewing Mri Slices, A Gui To
+Load And View .Nii Files., Dicom To N If Ti Converter, Generate
+Synthetic F Mri Data, Dicom To N If Ti Converter, Bipolar Colormap,
+and Rapid: A Routine Assurance Pipeline For Imaging Of Diffusion.

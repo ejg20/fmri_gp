@@ -1,4 +1,10 @@
 %function [] = run_fmriGP(filenames, savefilename, datafolder, savefolder, numberofsplits, maskfile)
+%
+% must install libraries:
+%   gpml-matlab (used v3.2-2013-01-15) http://www.gaussianprocess.org/gpml/code/
+%   NIFTI matlab (used NIFTI_20130306) included
+%
+
 close all
 %test
 nargin= 0;
